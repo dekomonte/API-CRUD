@@ -11,11 +11,18 @@ const pool = mysql.createPool({
   database: 'api_crud'
 });
 
-// Função que usa o pool de conexões para realizar a consulta
+// Função que usa o pool de conexões para realizar a consulta de todos os clientes
 async function selectCustomers() {
-    const [rows] = await pool.query("SELECT * FROM Pessoas");
+    const [rows] = await pool.query("SELECT * FROM pessoas");
     return rows;
 }
 
-// Exporta a função selectCustomers
-module.exports = { selectCustomers };
+// Função para buscar uma pessoa específica pelo ID
+async function selectCustomer(id) {
+    const [rows] = await pool.query('SELECT * FROM pessoas WHERE ID=?', [id]);
+    return rows;
+}
+
+module.exports = { selectCustomers, selectCustomer }
+
+ 

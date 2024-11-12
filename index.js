@@ -19,6 +19,22 @@ app.use(express.json());
 // Rota de teste para garantir que o servidor está funcionando corretamente
 app.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
 
+// Rota para buscar uma pessoa específica com base no ID
+app.get('/pessoas/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await db.selectCustomer(id);  // Usando a função para buscar uma pessoa pelo ID
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'Pessoa não encontrada' });
+        }
+        res.json(result);
+    } catch (error) {
+        console.error('Erro ao buscar pessoa:', error);
+        res.status(500).json({ message: 'Erro no servidor ao buscar pessoa' });
+    }
+});
+ 
+
 // Rota GET para buscar todas as pessoas no banco de dados
 app.get('/pessoas', async (req, res) => {
     try {
