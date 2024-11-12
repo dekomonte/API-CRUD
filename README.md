@@ -8,8 +8,8 @@
 + Postman
 + ChatGPT
 
-#### CRUD: <br>
--[ ] Create
--[x] Read
--[ ] Update
--[x] Delete
+#### CRUD <br>
+- [ ] Create 
+- [x] Read
+- [ ] Update
+- [x] Delete
