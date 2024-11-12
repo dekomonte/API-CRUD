@@ -50,8 +50,22 @@ app.get('/pessoas', async (req, res) => {
     }
 });
 
+// Rota para deletar uma pessoa com base no ID
+app.delete('/pessoas/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await db.deleteCustomer(id);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Pessoa não encontrada' });
+        }
+        res.sendStatus(204); // Retorna 204 (Sem conteúdo) quando a deleção for bem-sucedida
+    } catch (error) {
+        console.error('Erro ao deletar pessoa:', error);
+        res.status(500).json({ message: 'Erro no servidor ao deletar pessoa' });
+    }
+});
+
 // Inicia o servidor na porta configurada, permitindo que ele comece a escutar as requisições
 app.listen(port, () => {
-    // Mensagem de sucesso para o console
     console.log('API funcionando!');
 });

@@ -23,6 +23,11 @@ async function selectCustomer(id) {
     return rows;
 }
 
-module.exports = { selectCustomers, selectCustomer }
+async function deleteCustomer(id) {
+    const [rows] = await pool.query('DELETE FROM pessoas WHERE ID=?', [id]);
+    return rows;
+}
+
+module.exports = { selectCustomers, selectCustomer, deleteCustomer }
 
  
