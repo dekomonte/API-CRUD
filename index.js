@@ -82,6 +82,21 @@ app.post('/pessoas', async (req, res) => {
     }
 });
 
+app.patch('/pessoas/:id', async (req, res) => {
+    try {
+        // Chama a função updateCustomer passando o ID da URL e os dados do corpo da requisição
+        await db.updateCustomer(req.params.id, req.body);
+
+        // Resposta de sucesso
+        res.status(200).json({ message: 'Pessoa atualizada com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao atualizar pessoa:', error);
+        // Resposta de erro no servidor
+        res.status(500).json({ message: 'Erro no servidor ao atualizar pessoa' });
+    }
+});
+
+
 
 // Inicia o servidor na porta configurada, permitindo que ele comece a escutar as requisições
 app.listen(port, () => {

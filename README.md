@@ -10,7 +10,7 @@
 + WampServer
 
 #### CRUD <br>
-- [ ] Create 
+- [x] Create 
 - [x] Read
-- [ ] Update
+- [x] Update
 - [x] Delete

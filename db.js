@@ -48,6 +48,46 @@ async function deleteCustomer(id) {
     return rows;
 }
 
-module.exports = { selectCustomers, selectCustomer, deleteCustomer, insertCustomer }
+async function updateCustomer(id, customer) {
+    // Inicializa um array de valores
+    const values = [];
+
+    // Cria a consulta SQL com base nos campos passados
+    let sql = 'UPDATE pessoas SET ';
+
+    // Adiciona apenas os campos que têm valores válidos
+    let fieldsToUpdate = [];
+    
+    if (customer.Nome) {
+        fieldsToUpdate.push('Nome=?');
+        values.push(customer.Nome);
+    }
+    if (customer.Ramal !== undefined && customer.Ramal !== null) {
+        fieldsToUpdate.push('Ramal=?');
+        values.push(customer.Ramal);
+    }
+    if (customer.UF) {
+        fieldsToUpdate.push('UF=?');
+        values.push(customer.UF);
+    }
+
+    // Verifica se há campos para atualizar
+    if (fieldsToUpdate.length === 0) {
+        throw new Error('Nenhum campo fornecido para atualização');
+    }
+
+    // Junta os campos a serem atualizados
+    sql += fieldsToUpdate.join(', ');
+
+    // Adiciona a condição WHERE
+    sql += ' WHERE ID=?';
+    values.push(id);
+
+    // Executa a consulta
+    await pool.query(sql, values);
+}
+
+
+module.exports = { selectCustomers, selectCustomer, deleteCustomer, insertCustomer, updateCustomer}
 
  
