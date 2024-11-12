@@ -23,11 +23,31 @@ async function selectCustomer(id) {
     return rows;
 }
 
+async function insertCustomer(customerData) {
+    const { Nome, Ramal, UF } = customerData;
+
+    // Verifique se os campos obrigatórios foram fornecidos
+    if (!Nome || !Ramal || !UF) {
+        throw new Error('Faltando dados obrigatórios');
+    }
+
+    // SQL para inserir os dados
+    const query = 'INSERT INTO Pessoas (Nome, Ramal, UF) VALUES (?, ?, ?)';
+    try {
+        const [result] = await pool.query(query, [Nome, Ramal, UF]);
+        return result; // Retorna o resultado da inserção
+    } catch (error) {
+        console.error('Erro ao inserir pessoa:', error); // Log detalhado
+        throw new Error('Erro ao inserir pessoa no banco de dados: ' + error.message);
+    }
+}
+
+
 async function deleteCustomer(id) {
     const [rows] = await pool.query('DELETE FROM pessoas WHERE ID=?', [id]);
     return rows;
 }
 
-module.exports = { selectCustomers, selectCustomer, deleteCustomer }
+module.exports = { selectCustomers, selectCustomer, deleteCustomer, insertCustomer }
 
  

@@ -65,6 +65,24 @@ app.delete('/pessoas/:id', async (req, res) => {
     }
 });
 
+app.post('/pessoas', async (req, res) => {
+    try {
+        // Atribui os dados recebidos no corpo da requisição à variável customerData
+        const { Nome, Ramal, UF } = req.body;
+
+        // Chama a função insertCustomer para inserir os dados na tabela 'Pessoas'
+        await db.insertCustomer({ Nome, Ramal, UF });
+
+        // Envia uma resposta de sucesso com o status 201 (Criado)
+        res.status(201).json({ message: 'Pessoa criada com sucesso!' });
+    } catch (error) {
+        // Caso ocorra um erro, captura e retorna o erro com o status 500
+        console.error('Erro ao criar pessoa:', error);
+        res.status(500).json({ message: 'Erro no servidor ao criar pessoa' });
+    }
+});
+
+
 // Inicia o servidor na porta configurada, permitindo que ele comece a escutar as requisições
 app.listen(port, () => {
     console.log('API funcionando!');

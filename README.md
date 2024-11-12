@@ -7,6 +7,7 @@
 + MySQL
 + Postman
 + ChatGPT
++ WampServer
 
 #### CRUD <br>
 - [ ] Create 
