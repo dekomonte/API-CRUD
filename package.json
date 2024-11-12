@@ -1,0 +1,17 @@
+{
+  "name": "api-crud",
+  "version": "1.0.0",
+  "description": "[Criando uma WebAPI com Node.js e MySQL](https://www.luiztools.com.br/post/criando-uma-webapi-com-nodejs-e-mysql/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4"
+  }
+}
