@@ -13,13 +13,13 @@ const pool = mysql.createPool({
 
 // Função que usa o pool de conexões para realizar a consulta de todos os clientes
 async function selectCustomers() {
-    const [rows] = await pool.query("SELECT * FROM tb_ramal");
+    const [rows] = await pool.query("SELECT * FROM tb_ramal WHERE status_ramal = 1");
     return rows;
 }
 
 // Função para buscar uma pessoa específica pelo ID
 async function selectCustomer(id) {
-    const [rows] = await pool.query('SELECT * FROM tb_ramal WHERE ID=? and status_ramal = 1', [id]);
+    const [rows] = await pool.query("SELECT * FROM tb_ramal WHERE id_ramal=?", [id]);
     return rows;
 }
 
@@ -44,7 +44,7 @@ async function insertCustomer(customerData) {
 
 
 async function deleteCustomer(id) {
-    const [rows] = await pool.query('DELETE FROM tb_ramal WHERE ID=?', [id]);
+    const [rows] = await pool.query('DELETE FROM tb_ramal WHERE id_ramal=?', [id]);
     return rows;
 }
 

@@ -24,7 +24,7 @@ router.get('/ramais/:id', async (req, res) => {
         if (result.length === 0) {
             return res.status(404).json({ message: 'Ramal não encontrado' });
         }
-        res.json(result);
+        res.json(result[0]);
     } catch (error) {
         console.error('Erro ao buscar ramal:', error);
         res.status(500).json({ message: 'Erro no servidor ao buscar ramal' });
